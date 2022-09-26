@@ -143,7 +143,7 @@ module Make (Flow : Mirage_flow.S) = struct
   let sleep flow timeout =
     flow.sleep timeout >>= fun () -> Lwt.return (Error `Closed)
 
-  let writev ?(timeout = 5_000_000_000L) flow iovecs =
+  let writev ?(timeout = 500_000_000_000L) flow iovecs =
     let rec go acc = function
       | [] -> Lwt.return (`Ok acc)
       | { Faraday.buffer; off; len } :: rest -> (
